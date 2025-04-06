@@ -1,6 +1,6 @@
 // === CS400 File Header Information ===
-// Name: <your full name>
-// Email: <your @wisc.edu email address>
+// Name: <Jay Uppal>
+// Email: <juppal@wisc.edu>
 // Group and Team: <your group name: two letters, and team color>
 // Group TA: <name of your group's ta>
 // Lecturer: <name of your lecturer>
@@ -113,4 +113,147 @@ public class DijkstraGraph<NodeType, EdgeType extends Number>
     }
 
     // TODO: implement 3+ tests in step 4.1
+	/**
+        * This test creates a graph with 10 nodes and 15 edges. It then checks
+        * that the shortest path from node D to node L is correct, and that the
+        * cost of that path is correct. The expected path is D -> G -> L, and
+        * the expected cost is 9.0.
+     */
+    @Test
+    public void test1() {
+        BaseGraph<String, Double> graph = new DijkstraGraph<>();
+        graph.insertNode("A");
+        graph.insertNode("B");
+        graph.insertNode("M");
+        graph.insertNode("D");
+        graph.insertNode("E");
+        graph.insertNode("F");
+        graph.insertNode("I");
+        graph.insertNode("G");
+        graph.insertNode("H");
+        graph.insertNode("L");
+
+
+        graph.insertEdge("A", "H", 7.0);
+        graph.insertEdge("D", "A", 7.0);
+        graph.insertEdge("G", "A", 4.0);
+        graph.insertEdge("A", "B", 1.0);
+        graph.insertEdge("A", "M", 5.0);
+        graph.insertEdge("B", "M", 3.0);
+        graph.insertEdge("H", "B", 6.0);
+        graph.insertEdge("M", "I", 4.0);
+        graph.insertEdge("M", "E", 3.0);
+        graph.insertEdge("M", "F", 4.0);
+        graph.insertEdge("I", "H", 2.0);
+        graph.insertEdge("I", "D", 1.0);
+        graph.insertEdge("H", "I", 2.0);
+        graph.insertEdge("D", "F", 4.0);
+        graph.insertEdge("D", "G", 2.0);
+        graph.insertEdge("F", "G", 9.0);
+        graph.insertEdge("G", "H", 9.0);
+        graph.insertEdge("G", "L", 7.0);
+        graph.insertEdge("H", "L", 2.0);
+
+        assertEquals(Arrays.asList("D", "G", "L"), ((DijkstraGraph<String, Double>) graph).shortestPathData("D", "L"));
+        assertEquals(9.0, ((DijkstraGraph<String, Double>) graph).shortestPathCost("D", "L"));
+    }
+
+    /**
+        * This test creates a graph with 10 nodes and 15 edges. It then checks
+        * that the shortest path from node A to node D is correct, and that the
+        * cost of that path is correct. The expected path is A -> B -> M -> I ->
+        * D, and the expected cost is 9.0.
+     */
+    @Test
+    public void test2() {
+        BaseGraph<String, Double> graph = new DijkstraGraph<>();
+        graph.insertNode("A");
+        graph.insertNode("B");
+        graph.insertNode("M");
+        graph.insertNode("D");
+        graph.insertNode("E");
+        graph.insertNode("F");
+        graph.insertNode("I");
+        graph.insertNode("G");
+        graph.insertNode("H");
+        graph.insertNode("L");
+
+
+        graph.insertEdge("A", "H", 7.0);
+        graph.insertEdge("D", "A", 7.0);
+        graph.insertEdge("G", "A", 4.0);
+        graph.insertEdge("A", "B", 1.0);
+        graph.insertEdge("A", "M", 5.0);
+        graph.insertEdge("B", "M", 3.0);
+        graph.insertEdge("H", "B", 6.0);
+        graph.insertEdge("M", "I", 4.0);
+        graph.insertEdge("M", "E", 3.0);
+        graph.insertEdge("M", "F", 4.0);
+        graph.insertEdge("I", "H", 2.0);
+        graph.insertEdge("I", "D", 1.0);
+        graph.insertEdge("H", "I", 2.0);
+        graph.insertEdge("D", "F", 4.0);
+        graph.insertEdge("D", "G", 2.0);
+        graph.insertEdge("F", "G", 9.0);
+        graph.insertEdge("G", "H", 9.0);
+        graph.insertEdge("G", "L", 7.0);
+        graph.insertEdge("H", "L", 2.0);
+
+        assertEquals(Arrays.asList("A", "B", "M", "I", "D"),
+                ((DijkstraGraph<String, Double>) graph).shortestPathData("A",
+                "D"));
+        assertEquals(9.0, ((DijkstraGraph<String, Double>) graph).shortestPathCost("A", "D"));
+    }
+
+    /**
+     * This test checks the behavior of the DijkstraGraph implementation when the
+     * start and end nodes both exist in the graph, but there is no sequence of
+     * directed edges that connects them. In this case, we add a node "Z" that is
+     * disconnected from all other nodes. We attempt to compute the shortest path
+     * from a connected node ("A") to the disconnected node ("Z").
+     *
+     * The test asserts that calling shortestPathData() or shortestPathCost()
+     * between these nodes will throw a NoSuchElementException, as no valid path exists.
+     */
+    @Test
+    public void test3() {
+        BaseGraph<String, Double> graph = new DijkstraGraph<>();
+        graph.insertNode("A");
+        graph.insertNode("B");
+        graph.insertNode("M");
+        graph.insertNode("D");
+        graph.insertNode("E");
+        graph.insertNode("F");
+        graph.insertNode("I");
+        graph.insertNode("G");
+        graph.insertNode("H");
+        graph.insertNode("L");
+        graph.insertNode("Z"); // Disconnected node
+
+        graph.insertEdge("A", "H", 7.0);
+        graph.insertEdge("D", "A", 7.0);
+        graph.insertEdge("G", "A", 4.0);
+        graph.insertEdge("A", "B", 1.0);
+        graph.insertEdge("A", "M", 5.0);
+        graph.insertEdge("B", "M", 3.0);
+        graph.insertEdge("H", "B", 6.0);
+        graph.insertEdge("M", "I", 4.0);
+        graph.insertEdge("M", "E", 3.0);
+        graph.insertEdge("M", "F", 4.0);
+        graph.insertEdge("I", "H", 2.0);
+        graph.insertEdge("I", "D", 1.0);
+        graph.insertEdge("H", "I", 2.0);
+        graph.insertEdge("D", "F", 4.0);
+        graph.insertEdge("D", "G", 2.0);
+        graph.insertEdge("F", "G", 9.0);
+        graph.insertEdge("G", "H", 9.0);
+        graph.insertEdge("G", "L", 7.0);
+        graph.insertEdge("H", "L", 2.0);
+
+        assertThrows(NoSuchElementException.class, () ->
+                ((DijkstraGraph<String, Double>) graph).shortestPathData("A", "Z"));
+
+        assertThrows(NoSuchElementException.class, () ->
+                ((DijkstraGraph<String, Double>) graph).shortestPathCost("A", "Z"));
+    }
 }
