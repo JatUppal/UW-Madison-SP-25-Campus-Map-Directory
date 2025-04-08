@@ -86,6 +86,8 @@ public class DijkstraGraph<NodeType, EdgeType extends Number>
         // create a map of SearchNodes for each node in the graph
         MapADT<NodeType, Boolean> visited = new PlaceholderMap<>();
 
+        pq.add(new SearchNode(nodes.get(start), 0.0, null));
+
         while (!pq.isEmpty()) {
             // remove the SearchNode with the lowest cost from the queue
             SearchNode current = pq.poll();
