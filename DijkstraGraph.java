@@ -3,13 +3,14 @@
 // Email: <juppal@wisc.edu>
 // Group and Team: <your group name: two letters, and team color>
 // Group TA: <name of your group's ta>
-// Lecturer: <name of your lecturer>
+// Lecturer: <Gary Dahl>
 // Notes to Grader: <optional extra notes>
 
-import java.util.PriorityQueue;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.NoSuchElementException;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.*;
+
 
 /**
  * This class extends the BaseGraph data structure with additional methods for
@@ -76,8 +77,34 @@ public class DijkstraGraph<NodeType, EdgeType extends Number>
      *                                correspond to a graph node
      */
     protected SearchNode computeShortestPath(NodeType start, NodeType end) {
-        // implement in step 5.3
-        return null;
+        if (!nodes.containsKey(start) || !nodes.containsKey(end)) {
+            throw new NoSuchElementException("Start or end node not in graph");
+        }
+
+        // create a priority queue of SearchNodes
+        PriorityQueue<SearchNode> pq = new PriorityQueue<>();
+        // create a map of SearchNodes for each node in the graph
+        MapADT<NodeType, Boolean> visited = new PlaceholderMap<>();
+
+        while (!pq.isEmpty()) {
+            // remove the SearchNode with the lowest cost from the queue
+            SearchNode current = pq.poll();
+            if (visited.containsKey(current.node.data)) continue;
+            // mark the current node as visited
+            visited.put(current.node.data, true);
+
+            // if the current node is the end node then we have found the shortest path
+            if (current.node.data.equals(end)) return current;
+
+            // add all of the edges leaving this node to the queue
+            for (Edge edge : current.node.edgesLeaving) {
+                if (!visited.containsKey(edge.successor.data)) {
+                    pq.add(new SearchNode(edge.successor, current.cost + edge.data.doubleValue(), current));
+                }
+            }
+        }
+        // if we reach here then there is no path from start to end
+        throw new NoSuchElementException("No path from " + start.toString() + " to " + end.toString());
     }
 
     /**
@@ -93,8 +120,20 @@ public class DijkstraGraph<NodeType, EdgeType extends Number>
      * @return list of data item from node along this shortest path
      */
     public List<NodeType> shortestPathData(NodeType start, NodeType end) {
-        // implement in step 5.4
-        return null;
+        // compute the shortest path from start to end
+        SearchNode endNode = computeShortestPath(start, end);
+        // create a list to store the data values along the path
+        List<NodeType> path = new java.util.ArrayList<>();
+        // traverse the path from end to start, adding each node's data to the list
+        SearchNode current = endNode;
+        while (current != null) {
+            // add the data value of the current node to the path
+            // repeatedly adding at index 0 to push old nodes to the end
+            path.add(0, current.node.data);
+            current = current.predecessor;
+        }
+        // return the list of data values along the path
+        return path;
 	}
 
     /**
@@ -108,12 +147,16 @@ public class DijkstraGraph<NodeType, EdgeType extends Number>
      * @return the cost of the shortest path between these nodes
      */
     public double shortestPathCost(NodeType start, NodeType end) {
-        // implement in step 5.4
-        return Double.NaN;
+        // compute the shortest path from start to end
+        SearchNode endNode = computeShortestPath(start, end);
+        Double cost = endNode.cost;;
+
+        // return the cost of the path
+        return cost;
     }
 
     // TODO: implement 3+ tests in step 4.1
-	/**
+    /**
         * This test creates a graph with 10 nodes and 15 edges. It then checks
         * that the shortest path from node D to node L is correct, and that the
         * cost of that path is correct. The expected path is D -> G -> L, and
@@ -256,4 +299,6 @@ public class DijkstraGraph<NodeType, EdgeType extends Number>
         assertThrows(NoSuchElementException.class, () ->
                 ((DijkstraGraph<String, Double>) graph).shortestPathCost("A", "Z"));
     }
+
 }
+
