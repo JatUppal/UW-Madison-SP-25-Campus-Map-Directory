@@ -28,9 +28,12 @@ public class Frontend implements FrontendInterface{
     @Override
     public String generateShortestPathPromptHTML() {
         StringBuilder html = new StringBuilder();
+		// input for starting location
         html.append("<input type='text' id='start' placeholder='Enter the starting location:'>");
+		// input for destination
         html.append("<input type='text' id='end' placeholder='Enter the final destination:'>");
-        html.append("<button id='findShortest'>Find Shortest Path</button>");
+		// button to trigger shortest path calculation
+        html.append("<button type='button' id='findShortest'>Find Shortest Path</button>");
         return html.toString();
     }
 
@@ -60,11 +63,11 @@ public class Frontend implements FrontendInterface{
         StringBuilder html = new StringBuilder();
         html.append("<p>Shortest path from " + start + " to " + end + ":</p>");
 
-        html.append("<ol>");
+        html.append("<ol>\n");
         for (String loc : locations) {
-            html.append("<li>" + loc + "</li>");
+            html.append("<li>" + loc + "</li>\n");
         }
-        html.append("</ol>");
+        html.append("</ol>\n");
 
         if (times == null || times.isEmpty()) {
             return "<p>There is no travel time found between " + start + " and " + end + ".</p>";
@@ -96,7 +99,7 @@ public class Frontend implements FrontendInterface{
     public String generateFurthestDestinationFromPromptHTML() {
         StringBuilder html = new StringBuilder();
         html.append("<input type='text' id='from' placeholder='Enter the starting location:'>");
-        html.append("<button id='findFurthest'>Furthest Destination From</button>");
+        html.append("<button type='button' id='findFurthest'>Furthest Destination From</button>");
         return html.toString();
     }
 
@@ -123,12 +126,12 @@ public class Frontend implements FrontendInterface{
         }
         html.append("<p>Furthest destination from " + start + " is " + furthest + ".</p>");
         html.append("<p>Locations on the path between " + start + " and " + furthest + ":</p>");
-        html.append("<ol>");
+        html.append("<ol>\n");
         List<String> locations = backend.findLocationsOnShortestPath(start, furthest);
         for (String loc : locations) {
-            html.append("<li>" + loc + "</li>");
+            html.append("<li>" + loc + "</li>\n");
         }
-        html.append("</ol>");
+        html.append("</ol>\n");
 
         return html.toString();
     }
