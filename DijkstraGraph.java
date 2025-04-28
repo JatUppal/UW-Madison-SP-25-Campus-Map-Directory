@@ -1,9 +1,9 @@
 // === CS400 File Header Information ===
-// Name: <Jay Uppal>
-// Email: <juppal@wisc.edu>
-// Group and Team: <your group name: two letters, and team color>
+// Name: Jay Uppal
+// Email: juppal@wisc.edu
+// Group and Team: P2.1516 
 // Group TA: <name of your group's ta>
-// Lecturer: <Gary Dahl>
+// Lecturer: Gary Dahl
 // Notes to Grader: <optional extra notes>
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,7 +58,7 @@ public class DijkstraGraph<NodeType, EdgeType extends Number>
      * Constructor that sets the map that the graph uses.
      */
     public DijkstraGraph() {
-        super(new PlaceholderMap<>());
+        super(new HashtableMap<>());
     }
 
     /**
@@ -84,7 +84,7 @@ public class DijkstraGraph<NodeType, EdgeType extends Number>
         // create a priority queue of SearchNodes
         PriorityQueue<SearchNode> pq = new PriorityQueue<>();
         // create a map of SearchNodes for each node in the graph
-        MapADT<NodeType, Boolean> visited = new PlaceholderMap<>();
+        MapADT<NodeType, Boolean> visited = new HashtableMap<>();
 
         pq.add(new SearchNode(nodes.get(start), 0.0, null));
 

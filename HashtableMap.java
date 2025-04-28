@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
@@ -172,6 +173,19 @@ public class HashtableMap<KeyType, ValueType> implements MapADT<KeyType, ValueTy
     public int getCapacity() {
         return capacity;
     }
+
+	@Override
+	public List<KeyType> getKeys() {
+		List<KeyType> keys = new LinkedList<>();
+		for (LinkedList<Pair> bucket : table) {
+			if (bucket != null) {
+				for (Pair pair : bucket) {
+					keys.add(pair.key);
+				}
+			}
+		}
+		return keys;
+	}
 
 
     // Midweek Test Methods 	
