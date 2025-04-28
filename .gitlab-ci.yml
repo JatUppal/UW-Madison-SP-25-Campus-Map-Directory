@@ -7,3 +7,4 @@ submission feedback:
     image: registry.doit.wisc.edu/cdis/cs/courses/cs400/containers:latest
     script:
         - ./.checkSubmission
+
