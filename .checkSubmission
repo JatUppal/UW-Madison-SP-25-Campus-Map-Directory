@@ -16,15 +16,15 @@ if [[ -d /javafx  ]]; then
 fi
 
 if [[ ! -f Makefile ]]; then
-	echo
-	echo "Submission Failed Check: no Makefile found"
-	exit 1
+    echo
+    echo "Submission Failed Check: no Makefile found"
+    exit 1
 fi
 
 if ! make -n startServer ; then
-	echo
-	echo "Submission Failed Check: Makefile does not include the target startServer"
-	exit 1
+    echo
+    echo "Submission Failed Check: Makefile does not include the target startServer"
+    exit 1
 fi
 
 if ! make -n runAllTests ; then
@@ -48,3 +48,4 @@ fi
 echo
 echo "Submission Passed Basic Scan"
 exit 0
+
