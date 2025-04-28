@@ -5,13 +5,7 @@ submission feedback:
     tags: 
         - csl
     image: registry.doit.wisc.edu/cdis/cs/courses/cs400/containers:latest
-<<<<<<< HEAD
-    script:
-        - ./.checkSubmission
-
-=======
     timeout: 5m
     script:
         - ./.checkSubmission
->>>>>>> backend
 

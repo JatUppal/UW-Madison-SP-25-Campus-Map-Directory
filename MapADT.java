@@ -9,6 +9,7 @@ public interface MapADT<KeyType, ValueType> {
 
     /**
      * Adds a new key,value pair/mapping to this collection.
+     * It is ok that the value is null.
      * @param key the key of the key,value pair
      * @param value the value that key maps to
      * @throws IllegalArgumentException if key already maps to a value
@@ -19,8 +20,7 @@ public interface MapADT<KeyType, ValueType> {
     /**
      * Checks whether a key maps to a value in this collection.
      * @param key the key to check
-     * @return true if the key maps to a value, and false is the
-     *         key doesn't map to a value
+     * @return true if the key maps to a value, and false if the key doesn't map to a value
      */
     public boolean containsKey(KeyType key);
 
@@ -28,8 +28,7 @@ public interface MapADT<KeyType, ValueType> {
      * Retrieves the specific value that a key maps to.
      * @param key the key to look up
      * @return the value that key maps to
-     * @throws NoSuchElementException when key is not stored in this
-     *         collection
+     * @throws NoSuchElementException when key is not stored in this collection
      */
     public ValueType get(KeyType key) throws NoSuchElementException;
 
@@ -37,8 +36,7 @@ public interface MapADT<KeyType, ValueType> {
      * Remove the mapping for a key from this collection.
      * @param key the key whose mapping to remove
      * @return the value that the removed key mapped to
-     * @throws NoSuchElementException when key is not stored in this
-     *         collection
+     * @throws NoSuchElementException when key is not stored in this collection
      */
     public ValueType remove(KeyType key) throws NoSuchElementException;
 
