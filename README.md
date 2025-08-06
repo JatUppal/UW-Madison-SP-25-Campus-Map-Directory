@@ -48,6 +48,14 @@ This project streamlines the development of campus mapping applications with fea
 
 ---
 
+## 🎥 Demo Preview
+
+![Demo Preview](images/DemoPrev2.gif)
+
+> 🔗 [Watch full demo video on MediaSpace (1 min)](https://mediaspace.wisc.edu/media/CS400%20P2%20Demo/1_dvsuxgn2)
+
+---
+
 ## Getting Started
 
 ### Prerequisites
