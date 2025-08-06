@@ -111,7 +111,7 @@ mvn exec:java
 
 ### Testing
 
-Uw-madison-sp-25-campus-map-directory uses the {__test_framework__} test framework. Run the test suite with:
+Uw-madison-sp-25-campus-map-directory uses the JUNIT test framework. Run the test suite with:
 
 **Using [maven](https://maven.apache.org/):**
 
